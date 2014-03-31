@@ -1,5 +1,5 @@
 require 'capistrano'
-require 'capistrano-ext-multistage'
+require 'capistrano/ext/multistage'
 
 module Capistrano
   module Ext
