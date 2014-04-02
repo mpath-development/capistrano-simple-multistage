@@ -11,9 +11,18 @@ module Capistrano
               # Stage specific callbacks
               set :stage_callbacks, {}
 
-              # Helper method to run a block of code for a specific stage
-              def in_stage(stage_name, &block)
-                (stage_callbacks[stage_name] ||= []) << block
+              # Helper method to run a block of code for one or more stages
+              def in_stage(*stages, &block)
+                stages.each do |stage_name|
+                  (stage_callbacks[stage_name] ||= []) << block
+                end
+              end
+
+              # Helper method to run a block of code for all stages
+              def in_all_stages(&block)
+                in_stage(*stages) do 
+                  yield
+                end
               end
 
               # Task to run stage specific callbacks
