@@ -20,7 +20,7 @@ module Capistrano
 
               # Helper method to run a block of code for all stages
               def in_all_stages(&block)
-                in_stage(*stages) do 
+                in_stage(*stages.map(&:to_sym)) do 
                   yield
                 end
               end
